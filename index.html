@@ -4,6 +4,9 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>V2C.AI - Automate Conversations. Convert Visitors. Grow Faster.</title>
+    <!-- GSAP and ScrollTrigger CDNs -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></script>
     <style>
         /* General Styles */
         body {
@@ -38,12 +41,12 @@
             margin-bottom: 20px;
         }
         .hero p {
-            font-size: 24px; /* Increased from 20px */
+            font-size: 24px;
             margin-bottom: 40px;
             max-width: 800px;
             margin-left: auto;
             margin-right: auto;
-            font-weight: 500; /* Reduced from 600 */
+            font-weight: 500;
         }
         .btn {
             display: inline-block;
@@ -87,85 +90,57 @@
             flex: 1;
         }
         .about-text p {
-            font-weight: 500; /* Reduced from 600 */
+            font-weight: 500;
         }
         .about-image {
             flex: 1;
         }
-        @media (max-width: 768px) {
-            #about .container {
-                flex-direction: column;
-            }
-            .about-image {
-                order: -1;
-            }
+        /* Stacking Animation Styles */
+        .feature-stack {
+            position: relative;
+            min-height: 100vh; /* Ensure enough scroll space */
         }
-        .features {
-            display: flex;
-            flex-wrap: wrap;
-            justify-content: space-between;
-        }
-        .feature-item {
-            width: 30%;
+        .feature {
             background-color: white;
             padding: 20px;
             margin-bottom: 20px;
             border-radius: 8px;
             box-shadow: 0 4px 10px rgba(30, 58, 138, 0.1);
+            position: sticky;
+            top: 20px; /* Initial sticking position */
+            z-index: 1;
             transition: transform 0.3s, box-shadow 0.3s;
         }
-        .feature-item:hover {
+        .feature:hover {
             transform: translateY(-5px);
             box-shadow: 0 6px 15px rgba(30, 58, 138, 0.15);
         }
-        .feature-item h3 {
+        .feature h3 {
             font-size: 22px;
             color: #1E3A8A;
             margin-bottom: 10px;
         }
-        .feature-item p {
+        .feature p {
             font-size: 16px;
             color: #4B5563;
-            font-weight: 500; /* Reduced from 600 */
-        }
-        .audience-list {
-            display: flex;
-            flex-wrap: wrap;
-            justify-content: center;
-            gap: 15px;
+            font-weight: 500;
         }
         .audience-item {
-            background-color: white;
             padding: 15px 25px;
-            border-radius: 5px;
-            box-shadow: 0 2px 5px rgba(30, 58, 138, 0.1);
             font-size: 18px;
             color: #1E3A8A;
-            transition: background-color 0.3s, transform 0.3s;
-            width: 30%;
             text-align: center;
-        }
-        .audience-item:hover {
-            background-color: #E5E7EB;
-            transform: translateY(-2px);
         }
         .audience-item span {
             display: block;
             font-size: 16px;
             color: #4B5563;
-            font-weight: 500; /* Reduced from 600 */
+            font-weight: 500;
             margin-top: 5px;
-        }
-        .steps {
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            gap: 40px;
         }
         .step {
             display: flex;
             align-items: center;
-            max-width: 600px;
         }
         .step-number {
             width: 50px;
@@ -180,15 +155,15 @@
             margin-right: 20px;
             flex-shrink: 0;
         }
-        .step h3 {
+        .step-content h3 {
             font-size: 20px;
             margin-bottom: 5px;
             color: #1E3A8A;
         }
-        .step p {
+        .step-content p {
             font-size: 16px;
             color: #4B5563;
-            font-weight: 500; /* Reduced from 600 */
+            font-weight: 500;
         }
         .benefits {
             list-style: none;
@@ -203,7 +178,7 @@
             position: relative;
             padding-left: 35px;
             color: #1E3A8A;
-            font-weight: 500; /* Reduced from 600 */
+            font-weight: 500;
         }
         .benefits li:before {
             content: '✓';
@@ -216,7 +191,7 @@
             background: linear-gradient(to right, rgba(30, 58, 138, 0.7), rgba(6, 182, 212, 0.7));
         }
         #cta p {
-            font-weight: 500; /* Reduced from 600 */
+            font-weight: 500;
         }
         footer {
             background-color: #1E3A8A;
@@ -240,13 +215,19 @@
                 font-size: 32px;
             }
             .hero p {
-                font-size: 20px; /* Adjusted for mobile */
+                font-size: 20px;
             }
             .btn {
                 padding: 12px 25px;
                 font-size: 16px;
             }
-            .feature-item {
+            #about .container {
+                flex-direction: column;
+            }
+            .about-image {
+                order: -1;
+            }
+            .feature {
                 width: 100%;
             }
             .step {
@@ -256,9 +237,6 @@
             .step-number {
                 margin-right: 0;
                 margin-bottom: 15px;
-            }
-            .audience-item {
-                width: 80%;
             }
             h2 {
                 font-size: 28px;
@@ -273,16 +251,13 @@
                 font-size: 24px;
             }
             .hero p {
-                font-size: 16px; /* Adjusted for smaller screens */
+                font-size: 16px;
             }
             .btn {
                 display: block;
                 margin: 10px auto;
                 width: 80%;
                 text-align: center;
-            }
-            .audience-item {
-                width: 100%;
             }
         }
 
@@ -323,44 +298,44 @@
     <section id="features" class="section section-light" role="region" aria-labelledby="features-heading">
         <div class="container">
             <h2 id="features-heading">What You’ll Get with V2C.AI Bots</h2>
-            <div class="features">
-                <div class="feature-item">
+            <div class="feature-stack">
+                <div class="feature">
                     <h3>Website Integration</h3>
                     <p>Embed the chatbot directly on your website, styled to match your brand.</p>
                 </div>
-                <div class="feature-item">
+                <div class="feature">
                     <h3>WhatsApp Automation</h3>
                     <p>Interact with customers instantly on WhatsApp.</p>
                 </div>
-                <div class="feature-item">
+                <div class="feature">
                     <h3>Custom AI Training</h3>
                     <p>Your bot is trained using your PDFs, docs, website links, FAQs, or any content you provide.</p>
                 </div>
-                <div class="feature-item">
+                <div class="feature">
                     <h3>Lead Generation System</h3>
                     <p>Collect emails, phone numbers, and custom data directly through conversations.</p>
                 </div>
-                <div class="feature-item">
+                <div class="feature">
                     <h3>Real-Time Chat Monitoring</h3>
                     <p>Monitor live conversations and step in when necessary.</p>
                 </div>
-                <div class="feature-item">
+                <div class="feature">
                     <h3>Contact Management</h3>
                     <p>View and manage leads collected via chatbot interactions.</p>
                 </div>
-                <div class="feature-item">
+                <div class="feature">
                     <h3>Engagement & Activity Tracking</h3>
                     <p>Track user interactions to see what drives conversions.</p>
                 </div>
-                <div class="feature-item">
+                <div class="feature">
                     <h3>Analytics Dashboard</h3>
                     <p>Monitor usage and performance data in real time.</p>
                 </div>
-                <div class="feature-item">
+                <div class="feature">
                     <h3>Multi-Language Support</h3>
                     <p>Serve your customers in their preferred language.</p>
                 </div>
-                <div class="feature-item">
+                <div class="feature">
                     <h3>No Coding Needed</h3>
                     <p>We handle the setup and integration for you.</p>
                 </div>
@@ -374,30 +349,42 @@
             <h2 id="audience-heading">Who Can Use This?</h2>
             <p>Our AI chatbot solution is designed for a wide range of industries.</p>
             <p>It’s perfect for anyone looking to automate customer engagement and grow their business.</p>
-            <div class="audience-list">
-                <div class="audience-item">
-                    Local Businesses
-                    <span>Enhance customer engagement and streamline inquiries with AI-driven chatbots tailored for your local enterprise.</span>
+            <div class="feature-stack">
+                <div class="feature">
+                    <div class="audience-item">
+                        Local Businesses
+                        <span>Enhance customer engagement and streamline inquiries with AI-driven chatbots tailored for your local enterprise.</span>
+                    </div>
                 </div>
-                <div class="audience-item">
-                    Real Estate Agents
-                    <span>Provide instant property details and schedule viewings effortlessly through automated conversations.</span>
+                <div class="feature">
+                    <div class="audience-item">
+                        Real Estate Agents
+                        <span>Provide instant property details and schedule viewings effortlessly through automated conversations.</span>
+                    </div>
                 </div>
-                <div class="audience-item">
-                    Coaches & Trainers
-                    <span>Offer immediate responses to potential clients, sharing schedules and program details seamlessly.</span>
+                <div class="feature">
+                    <div class="audience-item">
+                        Coaches & Trainers
+                        <span>Offer immediate responses to potential clients, sharing schedules and program details seamlessly.</span>
+                    </div>
                 </div>
-                <div class="audience-item">
-                    E-Commerce Stores
-                    <span>Boost sales by assisting shoppers with product information and support, enhancing their shopping experience.</span>
+                <div class="feature">
+                    <div class="audience-item">
+                        E-Commerce Stores
+                        <span>Boost sales by assisting shoppers with product information and support, enhancing their shopping experience.</span>
+                    </div>
                 </div>
-                <div class="audience-item">
-                    Freelancers & Agencies
-                    <span>Automate client interactions, project inquiries, and lead collection to focus more on delivering quality work.</span>
+                <div class="feature">
+                    <div class="audience-item">
+                        Freelancers & Agencies
+                        <span>Automate client interactions, project inquiries, and lead collection to focus more on delivering quality work.</span>
+                    </div>
                 </div>
-                <div class="audience-item">
-                    EdTech & Course Creators
-                    <span>Engage students by providing instant answers about courses, schedules, and enrollment processes.</span>
+                <div class="feature">
+                    <div class="audience-item">
+                        EdTech & Course Creators
+                        <span>Engage students by providing instant answers about courses, schedules, and enrollment processes.</span>
+                    </div>
                 </div>
             </div>
         </div>
@@ -407,33 +394,41 @@
     <section id="how-it-works" class="section section-light" role="region" aria-labelledby="how-it-works-heading">
         <div class="container">
             <h2 id="how-it-works-heading">How It Works</h2>
-            <div class="steps">
-                <div class="step">
-                    <div class="step-number">1</div>
-                    <div>
-                        <h3>Upload Content</h3>
-                        <p>You provide your business details, FAQs, documents, or website links.</p>
+            <div class="feature-stack">
+                <div class="feature">
+                    <div class="step">
+                        <div class="step-number">1</div>
+                        <div class="step-content">
+                            <h3>Upload Content</h3>
+                            <p>You provide your business details, FAQs, documents, or website links.</p>
+                        </div>
                     </div>
                 </div>
-                <div class="step">
-                    <div class="step-number">2</div>
-                    <div>
-                        <h3>We Train Your Bot</h3>
-                        <p>Using advanced AI, your bot is trained to answer anything about your business.</p>
+                <div class="feature">
+                    <div class="step">
+                        <div class="step-number">2</div>
+                        <div class="step-content">
+                            <h3>We Train Your Bot</h3>
+                            <p>Using advanced AI, your bot is trained to answer anything about your business.</p>
+                        </div>
                     </div>
                 </div>
-                <div class="step">
-                    <div class="step-number">3</div>
-                    <div>
-                        <h3>Embed on Your Site</h3>
-                        <p>We provide a simple script that you add to your website.</p>
+                <div class="feature">
+                    <div class="step">
+                        <div class="step-number">3</div>
+                        <div class="step-content">
+                            <h3>Embed on Your Site</h3>
+                            <p>We provide a simple script that you add to your website.</p>
+                        </div>
                     </div>
                 </div>
-                <div class="step">
-                    <div class="step-number">4</div>
-                    <div>
-                        <h3>Monitor & Grow</h3>
-                        <p>View analytics, manage contacts, and continuously improve your chatbot.</p>
+                <div class="feature">
+                    <div class="step">
+                        <div class="step-number">4</div>
+                        <div class="step-content">
+                            <h3>Monitor & Grow</h3>
+                            <p>View analytics, manage contacts, and continuously improve your chatbot.</p>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -494,6 +489,53 @@
             window.addEventListener("load",onLoad)
           }
         })();
+    </script>
+
+    <!-- GSAP Animation Script -->
+    <script>
+        gsap.registerPlugin(ScrollTrigger);
+
+        // Function to apply stacking animation to a section
+        function animateStack(sectionId) {
+            const features = document.querySelectorAll(`#${sectionId} .feature`);
+            features.forEach((feature, index) => {
+                gsap.fromTo(feature, 
+                    {
+                        y: 100, // Start below
+                        opacity: 0
+                    }, 
+                    {
+                        y: 0, // Move to position
+                        opacity: 1,
+                        duration: 0.8,
+                        ease: "power2.out",
+                        scrollTrigger: {
+                            trigger: feature,
+                            start: "top 80%", // When the top of the feature hits 80% of viewport
+                            end: "top 20%", // Sticks until top hits 20%
+                            scrub: 1, // Smoothly animates with scroll
+                            toggleActions: "play none none reverse",
+                            onEnter: () => {
+                                if (index > 0) {
+                                    features[index - 1].style.zIndex = 0; // Lower previous item
+                                }
+                                feature.style.zIndex = index + 1; // Raise current item
+                            },
+                            onLeaveBack: () => {
+                                if (index > 0) {
+                                    features[index - 1].style.zIndex = index; // Restore previous item
+                                }
+                            }
+                        }
+                    }
+                );
+            });
+        }
+
+        // Apply animations to each section
+        animateStack("features");
+        animateStack("audience");
+        animateStack("how-it-works");
     </script>
 </body>
 </html>
