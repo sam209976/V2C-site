@@ -107,7 +107,6 @@
             border-radius: 8px;
             box-shadow: 0 4px 10px rgba(30, 58, 138, 0.1);
             position: sticky;
-            top: 20px; /* Initial sticking position */
             z-index: 1;
             transition: transform 0.3s, box-shadow 0.3s;
         }
@@ -501,18 +500,18 @@
             features.forEach((feature, index) => {
                 gsap.fromTo(feature, 
                     {
-                        y: 100, // Start below
+                        y: "100%", // Start from bottom of viewport
                         opacity: 0
                     }, 
                     {
-                        y: 0, // Move to position
+                        y: 0, // Move to centered position
                         opacity: 1,
                         duration: 0.8,
                         ease: "power2.out",
                         scrollTrigger: {
                             trigger: feature,
-                            start: "top 80%", // When the top of the feature hits 80% of viewport
-                            end: "top 20%", // Sticks until top hits 20%
+                            start: "top 70%", // Start when top of feature hits 70% of viewport
+                            end: "top 30%", // Stays centered until top hits 30%
                             scrub: 1, // Smoothly animates with scroll
                             toggleActions: "play none none reverse",
                             onEnter: () => {
