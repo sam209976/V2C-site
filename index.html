@@ -98,7 +98,8 @@
         /* Stacking Animation Styles */
         .feature-stack {
             position: relative;
-            min-height: 100vh; /* Ensure enough scroll space */
+            height: 100vh; /* Full viewport height for pinning */
+            overflow: hidden;
         }
         .feature {
             background-color: white;
@@ -106,8 +107,13 @@
             margin-bottom: 20px;
             border-radius: 8px;
             box-shadow: 0 4px 10px rgba(30, 58, 138, 0.1);
-            position: sticky;
-            z-index: 1;
+            position: absolute;
+            top: 100%; /* Start below viewport */
+            left: 0;
+            right: 0;
+            max-width: 600px; /* Constrain width */
+            margin-left: auto;
+            margin-right: auto;
             transition: transform 0.3s, box-shadow 0.3s;
         }
         .feature:hover {
@@ -227,7 +233,8 @@
                 order: -1;
             }
             .feature {
-                width: 100%;
+                width: 90%;
+                max-width: none;
             }
             .step {
                 flex-direction: column;
@@ -496,45 +503,42 @@
 
         // Function to apply stacking animation to a section
         function animateStack(sectionId) {
+            const stack = document.querySelector(`#${sectionId} .feature-stack`);
             const features = document.querySelectorAll(`#${sectionId} .feature`);
+            const featureHeight = features[0].offsetHeight + 20; // Height including margin
+
+            // Pin the section
+            ScrollTrigger.create({
+                trigger: stack,
+                start: "top top",
+                end: `+=${featureHeight * (features.length - 1)}`,
+                pin: true,
+                pinSpacing: false
+            });
+
             features.forEach((feature, index) => {
-                gsap.fromTo(feature, 
-                    {
-                        y: "100%", // Start from bottom of viewport
-                        opacity: 0
-                    }, 
-                    {
-                        y: 0, // Move to centered position
-                        opacity: 1,
-                        duration: 0.8,
-                        ease: "power2.out",
-                        scrollTrigger: {
-                            trigger: feature,
-                            start: "top 70%", // Start when top of feature hits 70% of viewport
-                            end: "top 30%", // Stays centered until top hits 30%
-                            scrub: 1, // Smoothly animates with scroll
-                            toggleActions: "play none none reverse",
-                            onEnter: () => {
-                                if (index > 0) {
-                                    features[index - 1].style.zIndex = 0; // Lower previous item
-                                }
-                                feature.style.zIndex = index + 1; // Raise current item
-                            },
-                            onLeaveBack: () => {
-                                if (index > 0) {
-                                    features[index - 1].style.zIndex = index; // Restore previous item
-                                }
+                if (index === 0) {
+                    // First item moves to center
+                    gsap.fromTo(feature, 
+                        { y: "100%", opacity: 0 }, 
+                        { 
+                            y: "50%", 
+                            opacity: 1, 
+                            duration: 0.8, 
+                            ease: "power2.out",
+                            scrollTrigger: {
+                                trigger: stack,
+                                start: "top 50%",
+                                end: "top 30%",
+                                scrub: 1
                             }
                         }
-                    }
-                );
-            });
-        }
-
-        // Apply animations to each section
-        animateStack("features");
-        animateStack("audience");
-        animateStack("how-it-works");
-    </script>
-</body>
-</html>
+                    );
+                } else {
+                    // Subsequent items stack over the previous one
+                    gsap.fromTo(feature, 
+                        { y: "100%", opacity: 0 }, 
+                        { 
+                            y: "50%", 
+                            opacity: 1, 
+     
