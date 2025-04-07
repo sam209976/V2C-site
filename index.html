@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -98,8 +99,8 @@
         /* Stacking Animation Styles */
         .feature-stack {
             position: relative;
-            height: 100vh; /* Full viewport height for pinning */
-            overflow: hidden;
+            min-height: 100vh; /* Ensure visibility even without JS */
+            overflow: visible; /* Allow content to show */
         }
         .feature {
             background-color: white;
@@ -107,11 +108,8 @@
             margin-bottom: 20px;
             border-radius: 8px;
             box-shadow: 0 4px 10px rgba(30, 58, 138, 0.1);
-            position: absolute;
-            top: 100%; /* Start below viewport */
-            left: 0;
-            right: 0;
-            max-width: 600px; /* Constrain width */
+            position: relative; /* Default to relative, JS will adjust */
+            max-width: 600px;
             margin-left: auto;
             margin-right: auto;
             transition: transform 0.3s, box-shadow 0.3s;
@@ -499,74 +497,57 @@
 
     <!-- GSAP Animation Script -->
     <script>
-        gsap.registerPlugin(ScrollTrigger);
+        document.addEventListener("DOMContentLoaded", () => {
+            gsap.registerPlugin(ScrollTrigger);
 
-        // Function to apply stacking animation to a section
-        function animateStack(sectionId) {
-            const stack = document.querySelector(`#${sectionId} .feature-stack`);
-            const features = document.querySelectorAll(`#${sectionId} .feature`);
-            const featureHeight = features[0].offsetHeight + 20; // Height including margin
+            console.log("GSAP Script Loaded");
 
-            // Pin the section
-            ScrollTrigger.create({
-                trigger: stack,
-                start: "top top",
-                end: `+=${featureHeight * (features.length - 1)}`,
-                pin: true,
-                pinSpacing: false
-            });
+            function animateStack(sectionId) {
+                const stack = document.querySelector(`#${sectionId} .feature-stack`);
+                const features = document.querySelectorAll(`#${sectionId} .feature`);
 
-            features.forEach((feature, index) => {
-                if (index === 0) {
-                    // First item moves to center
-                    gsap.fromTo(feature, 
-                        { y: "100%", opacity: 0 }, 
-                        { 
-                            y: "50%", 
-                            opacity: 1, 
-                            duration: 0.8, 
-                            ease: "power2.out",
-                            scrollTrigger: {
-                                trigger: stack,
-                                start: "top 50%",
-                                end: "top 30%",
-                                scrub: 1
-                            }
-                        }
-                    );
-                } else {
-                    // Subsequent items stack over the previous one
-                    gsap.fromTo(feature, 
-                        { y: "100%", opacity: 0 }, 
-                        { 
-                            y: "50%", 
-                            opacity: 1, 
-                              duration: 0.8, 
-                            ease: "power2.out",
-                            scrollTrigger: {
-                                trigger: features[index - 1],
-                                start: "top 50%",
-                                end: `+=${featureHeight}`,
-                                scrub: 1,
-                                onEnter: () => {
-                                    feature.style.zIndex = index + 1; // Raise current item
-                                    features[index - 1].style.zIndex = index; // Lower previous
-                                },
-                                onLeaveBack: () => {
-                                    feature.style.zIndex = 0; // Reset current
-                                    features[index - 1].style.zIndex = index; // Restore previous
-                                }
-                            }
-                        }
-                    );
+                if (!stack || features.length === 0) {
+                    console.error(`No stack or features found for section: ${sectionId}`);
+                    return;
                 }
-            });
-        }
 
-        // Apply animations to each section
-        animateStack("features");
-        animateStack("audience");
-        animateStack("how-it-works");
+                console.log(`Animating section: ${sectionId}, Features found: ${features.length}`);
+
+                // Set initial positions
+                features.forEach((feature, index) => {
+                    gsap.set(feature,{position:"absolute",top: "100%", opacity: 0, zIndex: index });
+                });
+
+                // Create a timeline for stacking
+                const tl = gsap.timeline({
+                    scrollTrigger: {
+                        trigger: stack,
+                        start: "top 20%",
+                        end: `+=${features.length * 300}`, // Adjust scroll duration
+                        scrub: 1,
+                        pin: true,
+                        pinSpacing: false
+                    }
+                });
+
+                features.forEach((feature, index) => {
+                    tl.to(feature, {
+                        top: "50%", // Center vertically
+                        opacity: 1,
+                        duration: 0.5,
+                        ease: "power2.out"
+                    })
+                    .to(feature, {
+                        duration: 0.5 // Pause briefly in the center
+                    }, "+=0.2"); // Small delay before next item stacks
+                });
+            }
+
+            // Apply animations
+            animateStack("features");
+            animateStack("audience");
+            animateStack("how-it-works");
+        });
     </script>
 </body>
 </html>
