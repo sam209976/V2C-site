@@ -541,4 +541,32 @@
                         { 
                             y: "50%", 
                             opacity: 1, 
-     
+                              duration: 0.8, 
+                            ease: "power2.out",
+                            scrollTrigger: {
+                                trigger: features[index - 1],
+                                start: "top 50%",
+                                end: `+=${featureHeight}`,
+                                scrub: 1,
+                                onEnter: () => {
+                                    feature.style.zIndex = index + 1; // Raise current item
+                                    features[index - 1].style.zIndex = index; // Lower previous
+                                },
+                                onLeaveBack: () => {
+                                    feature.style.zIndex = 0; // Reset current
+                                    features[index - 1].style.zIndex = index; // Restore previous
+                                }
+                            }
+                        }
+                    );
+                }
+            });
+        }
+
+        // Apply animations to each section
+        animateStack("features");
+        animateStack("audience");
+        animateStack("how-it-works");
+    </script>
+</body>
+</html>
