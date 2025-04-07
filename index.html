@@ -43,6 +43,7 @@
             max-width: 800px;
             margin-left: auto;
             margin-right: auto;
+            font-weight: 600;
         }
         .btn {
             display: inline-block;
@@ -85,6 +86,9 @@
         .about-text {
             flex: 1;
         }
+        .about-text p {
+            font-weight: 600;
+        }
         .about-image {
             flex: 1;
         }
@@ -122,6 +126,7 @@
         .feature-item p {
             font-size: 16px;
             color: #4B5563;
+            font-weight: 600;
         }
         .audience-list {
             display: flex;
@@ -137,10 +142,19 @@
             font-size: 18px;
             color: #1E3A8A;
             transition: background-color 0.3s, transform 0.3s;
+            width: 30%;
+            text-align: center;
         }
         .audience-item:hover {
             background-color: #E5E7EB;
             transform: translateY(-2px);
+        }
+        .audience-item span {
+            display: block;
+            font-size: 16px;
+            color: #4B5563;
+            font-weight: 600;
+            margin-top: 5px;
         }
         .steps {
             display: flex;
@@ -174,6 +188,7 @@
         .step p {
             font-size: 16px;
             color: #4B5563;
+            font-weight: 600;
         }
         .benefits {
             list-style: none;
@@ -188,6 +203,7 @@
             position: relative;
             padding-left: 35px;
             color: #1E3A8A;
+            font-weight: 600;
         }
         .benefits li:before {
             content: '✓';
@@ -198,6 +214,9 @@
         }
         #cta {
             background: linear-gradient(to right, rgba(30, 58, 138, 0.7), rgba(6, 182, 212, 0.7));
+        }
+        #cta p {
+            font-weight: 600;
         }
         footer {
             background-color: #1E3A8A;
@@ -240,7 +259,6 @@
             }
             .audience-item {
                 width: 80%;
-                text-align: center;
             }
             h2 {
                 font-size: 28px;
@@ -262,6 +280,9 @@
                 margin: 10px auto;
                 width: 80%;
                 text-align: center;
+            }
+            .audience-item {
+                width: 100%;
             }
         }
 
@@ -351,13 +372,33 @@
     <section id="audience" class="section" role="region" aria-labelledby="audience-heading">
         <div class="container">
             <h2 id="audience-heading">Who Can Use This?</h2>
+            <p>Our AI chatbot solution is designed for a wide range of industries.</p>
+            <p>It’s perfect for anyone looking to automate customer engagement and grow their business.</p>
             <div class="audience-list">
-                <div class="audience-item">Local Businesses</div>
-                <div class="audience-item">Real Estate Agents</div>
-                <div class="audience-item">Coaches & Trainers</div>
-                <div class="audience-item">E-Commerce Stores</div>
-                <div class="audience-item">Freelancers & Agencies</div>
-                <div class="audience-item">EdTech & Course Creators</div>
+                <div class="audience-item">
+                    Local Businesses
+                    <span>Enhance customer engagement and streamline inquiries with AI-driven chatbots tailored for your local enterprise.</span>
+                </div>
+                <div class="audience-item">
+                    Real Estate Agents
+                    <span>Provide instant property details and schedule viewings effortlessly through automated conversations.</span>
+                </div>
+                <div class="audience-item">
+                    Coaches & Trainers
+                    <span>Offer immediate responses to potential clients, sharing schedules and program details seamlessly.</span>
+                </div>
+                <div class="audience-item">
+                    E-Commerce Stores
+                    <span>Boost sales by assisting shoppers with product information and support, enhancing their shopping experience.</span>
+                </div>
+                <div class="audience-item">
+                    Freelancers & Agencies
+                    <span>Automate client interactions, project inquiries, and lead collection to focus more on delivering quality work.</span>
+                </div>
+                <div class="audience-item">
+                    EdTech & Course Creators
+                    <span>Engage students by providing instant answers about courses, schedules, and enrollment processes.</span>
+                </div>
             </div>
         </div>
     </section>
@@ -447,7 +488,7 @@
             script.domain="www.chatbase.co";
             document.body.appendChild(script)
           };
-           if(document.readyState==="complete"){
+          if(document.readyState==="complete"){
             onLoad()
           }else{
             window.addEventListener("load",onLoad)
