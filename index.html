@@ -1,451 +1,477 @@
-<!DOCTYPE html>  <html lang="en">  
-<head>  
-    <meta charset="UTF-8">  
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">  
-    <title>V2C.AI - Automate Conversations. Convert Visitors. Grow Faster.</title>  
-    <style>  
-        /* General Styles */  
-        body {  
-            font-family: Arial, sans-serif;  
-            margin: 0;  
-            padding: 0;  
-            line-height: 1.6;  
-            background-color: #F9FAFB;  
-        }  .container {  
-        max-width: 1000px;  
-        margin: 0 auto;  
-        padding: 0 20px;  
-    }  
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>V2C.AI - Automate Conversations. Convert Visitors. Grow Faster.</title>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto+Mono:wght@400;700&display=swap" rel="stylesheet">
+    <style>
+        /* General Styles */
+        body {
+            font-family: 'Roboto Mono', monospace;
+            margin: 0;
+            padding: 0;
+            line-height: 1.6;
+            background-color: #F9FAFB;
+        }
+        .container {
+            max-width: 1000px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+        .section {
+            padding: 60px 20px;
+        }
+        h2 {
+            font-size: 36px;
+            margin-bottom: 30px;
+            text-align: center;
+            color: #1E3A8A;
+        }
+        .hero {
+            background: linear-gradient(to right, rgba(30, 58, 138, 0.7), rgba(6, 182, 212, 0.7)), url('images/hero.jpg');
+            background-size: cover;
+            background-position: center;
+            color: white;
+            text-align: center;
+            padding: 120px 20px;
+        }
+        .hero h1 {
+            font-size: 48px;
+            margin-bottom: 20px;
+        }
+        .hero p {
+            font-size: 20px;
+            margin-bottom: 40px;
+            max-width: 800px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+        .btn {
+            display: inline-block;
+            padding: 15px 30px;
+            text-decoration: none;
+            border-radius: 5px;
+            font-size: 18px;
+            margin: 10px;
+            transition: background-color 0.3s, transform 0.3s;
+        }
+        .btn-primary {
+            background-color: #06B6D4;
+            color: white;
+        }
+        .btn-primary:hover {
+            background-color: #0284C7;
+            transform: translateY(-2px);
+        }
+        .btn-secondary {
+            background-color: #E5E7EB;
+            color: #1E3A8A;
+        }
+        .btn-secondary:hover {
+            background-color: #D1D5DB;
+            transform: translateY(-2px);
+        }
+        .section-light {
+            background-color: #F9FAFB;
+        }
+        .section-dark {
+            background: linear-gradient(to right, #1E3A8A, #06B6D4);
+            color: white;
+            text-align: center;
+        }
+        #about .container {
+            display: flex;
+            align-items: center;
+            gap: 20px;
+        }
+        .about-text {
+            flex: 1;
+        }
+        .about-image {
+            flex: 1;
+        }
+        .about-image img {
+            width: 100%;
+            height: auto;
+        }
+        @media (max-width: 768px) {
+            #about .container {
+                flex-direction: column;
+            }
+            .about-image {
+                order: -1;
+            }
+        }
+        .features {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: space-between;
+        }
+        .feature-item {
+            width: 30%;
+            background-color: white;
+            padding: 20px;
+            margin-bottom: 20px;
+            border-radius: 8px;
+            box-shadow: 0 4px 10px rgba(30, 58, 138, 0.1);
+            transition: transform 0.3s, box-shadow 0.3s;
+        }
+        .feature-item:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 6px 15px rgba(30, 58, 138, 0.15);
+        }
+        .feature-item h3 {
+            font-size: 22px;
+            color: #1E3A8A;
+            margin-bottom: 10px;
+        }
+        .feature-item p {
+            font-size: 16px;
+            color: #4B5563;
+        }
+        .audience-list {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 15px;
+        }
+        .audience-item {
+            background-color: white;
+            padding: 15px 25px;
+            border-radius: 5px;
+            box-shadow: 0 2px 5px rgba(30, 58, 138, 0.1);
+            font-size: 18px;
+            color: #1E3A8A;
+            transition: background-color 0.3s, transform 0.3s;
+        }
+        .audience-item:hover {
+            background-color: #E5E7EB;
+            transform: translateY(-2px);
+        }
+        .steps {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 40px;
+        }
+        .step {
+            display: flex;
+            align-items: center;
+            max-width: 600px;
+        }
+        .step-number {
+            width: 50px;
+            height: 50px;
+            background-color: #06B6D4;
+            color: white;
+            border-radius: 50%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-size: 24px;
+            margin-right: 20px;
+            flex-shrink: 0;
+        }
+        .step h3 {
+            font-size: 20px;
+            margin-bottom: 5px;
+            color: #1E3A8A;
+        }
+        .step p {
+            font-size: 16px;
+            color: #4B5563;
+        }
+        .benefits {
+            list-style: none;
+            padding: 0;
+            text-align: left;
+            max-width: 500px;
+            margin: 0 auto;
+        }
+        .benefits li {
+            font-size: 18px;
+            margin-bottom: 15px;
+            position: relative;
+            padding-left: 35px;
+            color: #1E3A8A;
+        }
+        .benefits li:before {
+            content: '✓';
+            position: absolute;
+            left: 0;
+            color: #06B6D4;
+            font-size: 24px;
+        }
+        #cta {
+            background: linear-gradient(to right, rgba(30, 58, 138, 0.7), rgba(6, 182, 212, 0.7)), url('images/cta.jpg');
+            background-size: cover;
+            background-position: center;
+        }
+        footer {
+            background-color: #1E3A8A;
+            color: white;
+            padding: 20px;
+            text-align: center;
+            font-size: 16px;
+        }
+        footer a {
+            color: #06B6D4;
+            text-decoration: none;
+            margin: 0 5px;
+        }
+        footer a:hover {
+            text-decoration: underline;
+        }
+        .section-image {
+            display: block;
+            margin: 0 auto 30px;
+            max-width: 100%;
+        }
 
-    .section {  
-        padding: 60px 20px;  
-    }  
+        /* Enhanced Mobile Optimization */
+        @media (max-width: 768px) {
+            .hero h1 {
+                font-size: 32px; /* Slightly smaller for better fit */
+            }
+            .hero p {
+                font-size: 16px;
+            }
+            .btn {
+                padding: 12px 25px; /* Slightly smaller buttons */
+                font-size: 16px;
+            }
+            .feature-item {
+                width: 100%;
+            }
+            .step {
+                flex-direction: column;
+                text-align: center;
+            }
+            .step-number {
+                margin-right: 0;
+                margin-bottom: 15px;
+            }
+            .audience-item {
+                width: 80%;
+                text-align: center;
+            }
+            h2 {
+                font-size: 28px; /* Adjust heading size */
+            }
+        }
 
-    h2 {  
-        font-size: 36px;  
-        margin-bottom: 30px;  
-        text-align: center;  
-        color: #1E3A8A;  
-    }  
+        @media (max-width: 480px) {
+            .hero {
+                padding: 80px 15px; /* Reduce padding on very small screens */
+            }
+            .hero h1 {
+                font-size: 24px;
+            }
+            .hero p {
+                font-size: 14px;
+            }
+            .btn {
+                display: block; /* Stack buttons */
+                margin: 10px auto;
+                width: 80%;
+                text-align: center;
+            }
+        }
 
-    .hero {  
-        background: linear-gradient(to right, rgba(30, 58, 138, 0.7), rgba(6, 182, 212, 0.7)), url('images/hero.jpg');  
-        background-size: cover;  
-        background-position: center;  
-        color: white;  
-        text-align: center;  
-        padding: 120px 20px;  
-    }  
-    .hero h1 {  
-        font-size: 48px;  
-        margin-bottom: 20px;  
-    }  
-    .hero p {  
-        font-size: 20px;  
-        margin-bottom: 40px;  
-        max-width: 800px;  
-        margin-left: auto;  
-        margin-right: auto;  
-    }  
-    .btn {  
-        display: inline-block;  
-        padding: 15px 30px;  
-        text-decoration: none;  
-        border-radius: 5px;  
-        font-size: 18px;  
-        margin: 10px;  
-        transition: background-color 0.3s, transform 0.3s;  
-    }  
-    .btn-primary {  
-        background-color: #06B6D4;  
-        color: white;  
-    }  
-    .btn-primary:hover {  
-        background-color: #0284C7;  
-        transform: translateY(-2px);  
-    }  
-    .btn-secondary {  
-        background-color: #E5E7EB;  
-        color: #1E3A8A;  
-    }  
-    .btn-secondary:hover {  
-        background-color: #D1D5DB;  
-        transform: translateY(-2px);  
-    }  
+        /* Accessibility Improvements */
+        a:focus, .btn:focus {
+            outline: 3px solid #06B6D4;
+            outline-offset: 2px;
+        }
+        .hero, #cta, .section-dark {
+            background-blend-mode: overlay; /* Ensure text readability over gradients */
+        }
+    </style>
+</head>
+<body>
+    <!-- Hero Section -->
+    <header class="hero" role="banner">
+        <div class="container">
+            <h1>Automate Conversations. Convert Visitors. Grow Faster.</h1>
+            <p>V2C.AI builds powerful AI chatbots trained on your business content, deployed on your website and WhatsApp to answer questions, generate leads, and boost conversions — 24/7.</p>
+            <a href="https://forms.gle/DWB2F9gDYhK91hqH8" target="_blank" class="btn btn-primary">Get Started Now</a>
+            <a href="https://wa.me/9493529014?text=Hey%20Team%20V2C.AI!%20I'm%20excited%20to%20explore%20how%20your%20AI%20bot%20can%20boost%20my%20business%20conversions.%20Let%27s%20get%20started!" target="_blank" class="btn btn-secondary">Launch My Bot</a>
+        </div>
+    </header>
 
-    .section-light {  
-        background-color: #F9FAFB;  
-    }  
-    .section-dark {  
-        background: linear-gradient(to right, #1E3A8A, #06B6D4);  
-        color: white;  
-        text-align: center;  
-    }  
+    <!-- About Section -->
+    <section id="about" class="section" role="region" aria-labelledby="about-heading">
+        <div class="container">
+            <div class="about-text">
+                <h2 id="about-heading">About V2C.AI</h2>
+                <p>At V2C.AI, we help businesses like yours save time, increase leads, and provide instant responses through intelligent AI chatbots. Whether you’re a freelancer, agency, coach, or local business owner, our bots are trained specifically for your brand and work around the clock to engage your audience.</p>
+            </div>
+            <div class="about-image">
+                <img src="images/about.jpg" alt="About V2C.AI">
+            </div>
+        </div>
+    </section>
 
-    #about .container {  
-        display: flex;  
-        align-items: center;  
-        gap: 20px;  
-    }  
-    .about-text {  
-        flex: 1;  
-    }  
-    .about-image {  
-        flex: 1;  
-    }  
-    .about-image img {  
-        width: 100%;  
-        height: auto;  
-    }  
-    @media (max-width: 768px) {  
-        #about .container {  
-            flex-direction: column;  
-        }  
-        .about-image {  
-            order: -1;  
-        }  
-    }  
+    <!-- Features Section -->
+    <section id="features" class="section section-light" role="region" aria-labelledby="features-heading">
+        <div class="container">
+            <h2 id="features-heading">What You’ll Get with V2C.AI Bots</h2>
+            <img src="images/features.jpg" alt="V2C.AI Features" class="section-image">
+            <div class="features">
+                <div class="feature-item">
+                    <h3>Website Integration</h3>
+                    <p>Embed the chatbot directly on your website, styled to match your brand.</p>
+                </div>
+                <div class="feature-item">
+                    <h3>WhatsApp Automation</h3>
+                    <p>Interact with customers instantly on WhatsApp.</p>
+                </div>
+                <div class="feature-item">
+                    <h3>Custom AI Training</h3>
+                    <p>Your bot is trained using your PDFs, docs, website links, FAQs, or any content you provide.</p>
+                </div>
+                <div class="feature-item">
+                    <h3>Lead Generation System</h3>
+                    <p>Collect emails, phone numbers, and custom data directly through conversations.</p>
+                </div>
+                <div class="feature-item">
+                    <h3>Real-Time Chat Monitoring</h3>
+                    <p>Monitor live conversations and step in when necessary.</p>
+                </div>
+                <div class="feature-item">
+                    <h3>Contact Management</h3>
+                    <p>View and manage leads collected via chatbot interactions.</p>
+                </div>
+                <div class="feature-item">
+                    <h3>Engagement & Activity Tracking</h3>
+                    <p>Track user interactions to see what drives conversions.</p>
+                </div>
+                <div class="feature-item">
+                    <h3>Analytics Dashboard</h3>
+                    <p>Monitor usage and performance data in real time.</p>
+                </div>
+                <div class="feature-item">
+                    <h3>Multi-Language Support</h3>
+                    <p>Serve your customers in their preferred language.</p>
+                </div>
+                <div class="feature-item">
+                    <h3>No Coding Needed</h3>
+                    <p>We handle the setup and integration for you.</p>
+                </div>
+            </div>
+        </div>
+    </section>
 
-    .features {  
-        display: flex;  
-        flex-wrap: wrap;  
-        justify-content: space-between;  
-    }  
-    .feature-item {  
-        width: 30%;  
-        background-color: white;  
-        padding: 20px;  
-        margin-bottom: 20px;  
-        border-radius: 8px;  
-        box-shadow: 0 4px 10px rgba(30, 58, 138, 0.1);  
-        transition: transform 0.3s, box-shadow 0.3s;  
-    }  
-    .feature-item:hover {  
-        transform: translateY(-5px);  
-        box-shadow: 0 6px 15px rgba(30, 58, 138, 0.15);  
-    }  
-    .feature-item h3 {  
-        font-size: 22px;  
-        color: #1E3A8A;  
-        margin-bottom: 10px;  
-    }  
-    .feature-item p {  
-        font-size: 16px;  
-        color: #4B5563;  
-    }  
+    <!-- Audience Section -->
+    <section id="audience" class="section" role="region" aria-labelledby="audience-heading">
+        <div class="container">
+            <h2 id="audience-heading">Who Can Use This?</h2>
+            <img src="images/users.jpg" alt="Users of V2C.AI" class="section-image">
+            <div class="audience-list">
+                <div class="audience-item">Local Businesses</div>
+                <div class="audience-item">Real Estate Agents</div>
+                <div class="audience-item">Coaches & Trainers</div>
+                <div class="audience-item">E-Commerce Stores</div>
+                <div class="audience-item">Freelancers & Agencies</div>
+                <div class="audience-item">EdTech & Course Creators</div>
+            </div>
+        </div>
+    </section>
 
-    .audience-list {  
-        display: flex;  
-        flex-wrap: wrap;  
-        justify-content: center;  
-        gap: 15px;  
-    }  
-    .audience-item {  
-        background-color: white;  
-        padding: 15px 25px;  
-        border-radius: 5px;  
-        box-shadow: 0 2px 5px rgba(30, 58, 138, 0.1);  
-        font-size: 18px;  
-        color: #1E3A8A;  
-        transition: background-color 0.3s, transform 0.3s;  
-    }  
-    .audience-item:hover {  
-        background-color: #E5E7EB;  
-        transform: translateY(-2px);  
-    }  
+    <!-- How It Works Section -->
+    <section id="how-it-works" class="section section-light" role="region" aria-labelledby="how-it-works-heading">
+        <div class="container">
+            <h2 id="how-it-works-heading">How It Works</h2>
+            <img src="images/process.jpg" alt="How V2C.AI Works" class="section-image">
+            <div class="steps">
+                <div class="step">
+                    <div class="step-number">1</div>
+                    <div>
+                        <h3>Upload Content</h3>
+                        <p>You provide your business details, FAQs, documents, or website links.</p>
+                    </div>
+                </div>
+                <div class="step">
+                    <div class="step-number">2</div>
+                    <div>
+                        <h3>We Train Your Bot</h3>
+                        <p>Using advanced AI, your bot is trained to answer anything about your business.</p>
+                    </div>
+                </div>
+                <div class="step">
+                    <div class="step-number">3</div>
+                    <div>
+                        <h3>Embed on Your Site</h3>
+                        <p>We provide a simple script that you add to your website.</p>
+                    </div>
+                </div>
+                <div class="step">
+                    <div class="step-number">4</div>
+                    <div>
+                        <h3>Monitor & Grow</h3>
+                        <p>View analytics, manage contacts, and continuously improve your chatbot.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
 
-    .steps {  
-        display: flex;  
-        flex-direction: column;  
-        align-items: center;  
-        gap: 40px;  
-    }  
-    .step {  
-        display: flex;  
-        align-items: center;  
-        max-width: 600px;  
-    }  
-    .step-number {  
-        width: 50px;  
-        height: 50px;  
-        background-color: #06B6D4;  
-        color: white;  
-        border-radius: 50%;  
-        display: flex;  
-        justify-content: center;  
-        align-items: center;  
-        font-size: 24px;  
-        margin-right: 20px;  
-        flex-shrink: 0;  
-    }  
-    .step h3 {  
-        font-size: 20px;  
-        margin-bottom: 5px;  
-        color: #1E3A8A;  
-    }  
-    .step p {  
-        font-size: 16px;  
-        color: #4B5563;  
-    }  
+    <!-- Why Choose Section -->
+    <section id="why-choose" class="section" role="region" aria-labelledby="why-choose-heading">
+        <div class="container">
+            <h2 id="why-choose-heading">Why Choose V2C.AI?</h2>
+            <img src="images/why.jpg" alt="Why Choose Us" class="section-image">
+            <ul class="benefits">
+                <li>Instant Setup</li>
+                <li>Easy to Manage</li>
+                <li>Proven Platform</li>
+                <li>Scalable & Reliable</li>
+                <li>Future-Ready AI</li>
+            </ul>
+        </div>
+    </section>
 
-    .benefits {  
-        list-style: none;  
-        padding: 0;  
-        text-align: left;  
-        max-width: 500px;  
-        margin: 0 auto;  
-    }  
-    .benefits li {  
-        font-size: 18px;  
-        margin-bottom: 15px;  
-        position: relative;  
-        padding-left: 35px;  
-        color: #1E3A8A;  
-    }  
-    .benefits li:before {  
-        content: '✓';  
-        position: absolute;  
-        left: 0;  
-        color: #06B6D4;  
-        font-size: 24px;  
-    }  
+    <!-- CTA Section -->
+    <section id="cta" class="section section-dark" role="region" aria-labelledby="cta-heading">
+        <div class="container">
+            <h2 id="cta-heading">Ready to let AI handle your conversations?</h2>
+            <p>Don’t lose customers to slow responses—let your AI chatbot work 24/7 while you focus on growth.</p>
+            <a href="https://forms.gle/DWB2F9gDYhK91hqH8" target="_blank" class="btn btn-primary">Launch My Bot Now</a>
+        </div>
+    </section>
 
-    #cta {  
-        background: linear-gradient(to right, rgba(30, 58, 138, 0.7), rgba(6, 182, 212, 0.7)), url('images/cta.jpg');  
-        background-size: cover;  
-        background-position: center;  
-    }  
+    <!-- Footer -->
+    <footer role="contentinfo">
+        <p>© 2025 V2C.AI | Contact: <a href="mailto:support@v2c.ai" class="support-email">support@v2c.ai</a> | Follow us: <a href="https://instagram.com/v2c.ai" target="_blank" class="social-link">Instagram</a> <a href="https://www.linkedin.com/in/visitors2-customers-733a2935a" target="_blank" class="social-link">LinkedIn</a></p>
+    </footer>
 
-    footer {  
-        background-color: #1E3A8A;  
-        color: white;  
-        padding: 20px;  
-        text-align: center;  
-        font-size: 16px;  
-    }  
-    footer a {  
-        color: #06B6D4;  
-        text-decoration: none;  
-        margin: 0 5px;  
-    }  
-    footer a:hover {  
-        text-decoration: underline;  
-    }  
-
-    .section-image {  
-        display: block;  
-        margin: 0 auto 30px;  
-        max-width: 100%;  
-    }  
-
-    @media (max-width: 768px) {  
-        .hero h1 {  
-            font-size: 36px;  
-        }  
-        .hero p {  
-            font-size: 18px;  
-        }  
-        .feature-item {  
-            width: 100%;  
-        }  
-        .step {  
-            flex-direction: column;  
-            text-align: center;  
-        }  
-        .step-number {  
-            margin-right: 0;  
-            margin-bottom: 15px;  
-        }  
-        .audience-item {  
-            width: 80%;  
-            text-align: center;  
-        }  
-    }  
-</style>
-
-</head>  
-<body>  
-    <!-- Hero Section -->  
-    <header class="hero">  
-        <div class="container">  
-            <h1>Automate Conversations. Convert Visitors. Grow Faster.</h1>  
-            <p>V2C.AI builds powerful AI chatbots trained on your business content, deployed on your website and WhatsApp to answer questions, generate leads, and boost conversions — 24/7.</p>  
-            <a href="https://forms.gle/DWB2F9gDYhK91hqH8" target="_blank" class="btn btn-primary">Get Started Now</a>  
-            <a href="https://wa.me/9493529014?text=Hey%20Team%20V2C.AI!%20I'm%20excited%20to%20explore%20how%20your%20AI%20bot%20can%20boost%20my%20business%20conversions.%20Let%27s%20get%20started!" target="_blank" class="btn btn-secondary">Launch My Bot</a>  
-        </div>  
-    </header>  <!-- About Section -->  
-<section id="about" class="section">  
-    <div class="container">  
-        <div class="about-text">  
-            <h2>About V2C.AI</h2>  
-            <p>At V2C.AI, we help businesses like yours save time, increase leads, and provide instant responses through intelligent AI chatbots. Whether you’re a freelancer, agency, coach, or local business owner, our bots are trained specifically for your brand and work around the clock to engage your audience.</p>  
-        </div>  
-        <div class="about-image">  
-            <img src="images/about.jpg" alt="About V2C.AI" />  
-        </div>  
-    </div>  
-</section>  
-
-<!-- Features Section -->  
-<section id="features" class="section section-light">  
-    <div class="container">  
-        <h2>What You’ll Get with V2C.AI Bots</h2>  
-        <img src="images/features.jpg" alt="V2C.AI Features" class="section-image" />  
-        <div class="features">  
-            <div class="feature-item">  
-                <h3>Website Integration</h3>  
-                <p>Embed the chatbot directly on your website, styled to match your brand.</p>  
-            </div>  
-            <div class="feature-item">  
-                <h3>WhatsApp Automation</h3>  
-                <p>Interact with customers instantly on WhatsApp.</p>  
-            </div>  
-            <div class="feature-item">  
-                <h3>Custom AI Training</h3>  
-                <p>Your bot is trained using your PDFs, docs, website links, FAQs, or any content you provide.</p>  
-            </div>  
-            <div class="feature-item">  
-                <h3>Lead Generation System</h3>  
-                <p>Collect emails, phone numbers, and custom data directly through conversations.</p>  
-            </div>  
-            <div class="feature-item">  
-                <h3>Real-Time Chat Monitoring</h3>  
-                <p>Monitor live conversations and step in when necessary.</p>  
-            </div>  
-            <div class="feature-item">  
-                <h3>Contact Management</h3>  
-                <p>View and manage leads collected via chatbot interactions.</p>  
-            </div>  
-            <div class="feature-item">  
-                <h3>Engagement & Activity Tracking</h3>  
-                <p>Track user interactions to see what drives conversions.</p>  
-            </div>  
-            <div class="feature-item">  
-                <h3>Analytics Dashboard</h3>  
-                <p>Monitor usage and performance data in real time.</p>  
-            </div>  
-            <div class="feature-item">  
-                <h3>Multi-Language Support</h3>  
-                <p>Serve your customers in their preferred language.</p>  
-            </div>  
-            <div class="feature-item">  
-                <h3>No Coding Needed</h3>  
-                <p>We handle the setup and integration for you.</p>  
-            </div>  
-        </div>  
-    </div>  
-</section>  
-
-<!-- Audience Section -->  
-<section id="audience" class="section">  
-    <div class="container">  
-        <h2>Who Can Use This?</h2>  
-        <img src="images/users.jpg" alt="Users of V2C.AI" class="section-image" />  
-        <div class="audience-list">  
-            <div class="audience-item">Local Businesses</div>  
-            <div class="audience-item">Real Estate Agents</div>  
-            <div class="audience-item">Coaches & Trainers</div>  
-            <div class="audience-item">E-Commerce Stores</div>  
-            <div class="audience-item">Freelancers & Agencies</div>  
-            <div class="audience-item">EdTech & Course Creators</div>  
-        </div>  
-    </div>  
-</section>  
-
-<!-- How It Works Section -->  
-<section id="how-it-works" class="section section-light">  
-    <div class="container">  
-        <h2>How It Works</h2>  
-        <img src="images/process.jpg" alt="How V2C.AI Works" class="section-image" />  
-        <div class="steps">  
-            <div class="step">  
-                <div class="step-number">1</div>  
-                <div>  
-                    <h3>Upload Content</h3>  
-                    <p>You provide your business details, FAQs, documents, or website links.</p>  
-                </div>  
-            </div>  
-            <div class="step">  
-                <div class="step-number">2</div>  
-                <div>  
-                    <h3>We Train Your Bot</h3>  
-                    <p>Using advanced AI, your bot is trained to answer anything about your business.</p>  
-                </div>  
-            </div>  
-            <div class="step">  
-                <div class="step-number">3</div>  
-                <div>  
-                    <h3>Embed on Your Site</h3>  
-                    <p>We provide a simple script that you add to your website.</p>  
-                </div>  
-            </div>  
-            <div class="step">  
-                <div class="step-number">4</div>  
-                <div>  
-                    <h3>Monitor & Grow</h3>  
-                    <p>View analytics, manage contacts, and continuously improve your chatbot.</p>  
-                </div>  
-            </div>  
-        </div>  
-    </div>  
-</section>  
-
-<!-- Why Choose Section -->  
-<section id="why-choose" class="section">  
-    <div class="container">  
-        <h2>Why Choose V2C.AI?</h2>  
-        <img src="images/why.jpg" alt="Why Choose Us" class="section-image" />  
-        <ul class="benefits">  
-            <li>Instant Setup</li>  
-            <li>Easy to Manage</li>  
-            <li>Proven Platform</li>  
-            <li>Scalable & Reliable</li>  
-            <li>Future-Ready AI</li>  
-        </ul>  
-    </div>  
-</section>  
-
-<!-- CTA Section -->  
-<section id="cta" class="section section-dark">  
-    <div class="container">  
-        <h2>Ready to let AI handle your conversations?</h2>  
-        <p>Don’t lose customers to slow responses—let your AI chatbot work 24/7 while you focus on growth.</p>  
-        <a href="https://forms.gle/DWB2F9gDYhK91hqH8" target="_blank" class="btn btn-primary">Launch My Bot Now</a>  
-    </div>  
-</section>  
-
-<!-- Footer -->  
-<footer>  
-    <p>© 2025 V2C.AI | Contact: <a href="mailto:support@v2c.ai" class="support-email">support@v2c.ai</a> | Follow us: <a href="https://instagram.com/v2c.ai" target="_blank" class="social-link">Instagram</a> <a href="https://www.linkedin.com/in/visitors2-customers-733a2935a" target="_blank" class="social-link">LinkedIn</a></p>  
-</footer>  
-
-<!-- Chatbot Embed Code -->  
-<script>  
-    (function(){  
-      if(!window.chatbase||window.chatbase("getState")!=="initialized"){  
-        window.chatbase=(...arguments)=>{  
-          if(!window.chatbase.q){window.chatbase.q=[]}  
-          window.chatbase.q.push(arguments)  
-        };  
-        window.chatbase=new Proxy(window.chatbase,{get(target,prop){  
-          if(prop==="q"){return target.q}  
-          return(...args)=>target(prop,...args)  
-        }})  
-      }  
-      const onLoad=function(){  
-        const script=document.createElement("script");  
-        script.src="https://www.chatbase.co/embed.min.js";  
-        script.id="YyAhikbzzEoLNCkFuVdDe";  
-        script.domain="www.chatbase.co";  
-        document.body.appendChild(script)  
-      };  
-      if(document.readyState==="complete"){  
-        onLoad()  
-      }else{  
-        window.addEventListener("load",onLoad)  
-      }  
-    })();  
-</script>
-
-</body>  
-</html>  
+    <!-- Chatbot Embed Code -->
+    <script>
+        (function(){
+          if(!window.chatbase||window.chatbase("getState")!=="initialized"){
+            window.chatbase=(...arguments)=>{
+              if(!window.chatbase.q){window.chatbase.q=[]}
+              window.chatbase.q.push(arguments)
+            };
+            window.chatbase=new Proxy(window.chatbase,{get(target,prop){
+              if(prop==="q"){return target.q}
+              return(...args)=>target(prop,...args)
+            }})
+          }
+          const onLoad=function(){
+            const script=document.createElement("script");
+            script.src="https://www.chatbase.co/embed.min.js";
+            script.id="YyAhikbzzEoLNCkFuVdDe";
+            script.domain="www.chatbase.co";
+            document.body.appendChild(script)
+          };
+          if(document.readyState==="complete"){
+            onLoad()
+          }else{
+            window.addEventListener("load",onLoad)
+          }
+        })();
+    </script>
+</body>
+</html>
