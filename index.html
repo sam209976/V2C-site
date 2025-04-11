@@ -17,7 +17,7 @@
   <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></script>
   <style>
     /* General Styles */
-    body {
+    html, body {
       font-family: Arial, sans-serif;
       margin: 0;
       padding: 0;
@@ -25,6 +25,7 @@
       background-color: #F9FAFB;
       width: 100%;
       overflow-x: hidden;
+      min-width: 100vw;
     }
     .container {
       max-width: 1000px;
@@ -47,6 +48,10 @@
       color: white;
       text-align: center;
       padding: 120px 20px;
+      width: 100vw;
+      margin: 0;
+      position: relative;
+      left: 0;
     }
     .hero h1 {
       font-size: 48px;
@@ -211,6 +216,10 @@
       padding: 20px;
       text-align: center;
       font-size: 16px;
+      width: 100vw;
+      margin: 0;
+      position: relative;
+      left: 0;
     }
     footer a {
       color: #06B6D4;
@@ -256,11 +265,19 @@
       .container {
         padding: 0 10px;
       }
+      .hero, footer {
+        padding: 80px 10px 80px 10px;
+        width: 100vw;
+        margin: 0;
+        box-sizing: border-box;
+      }
     }
 
     @media (max-width: 480px) {
       .hero {
         padding: 80px 15px;
+        width: 100vw;
+        margin: 0;
       }
       .hero h1 {
         font-size: 24px;
@@ -276,6 +293,11 @@
       }
       .container {
         padding: 0 5px;
+      }
+      footer {
+        padding: 20px 5px;
+        width: 100vw;
+        margin: 0;
       }
     }
 
@@ -365,7 +387,7 @@
   <section id="audience" class="section" role="region" aria-labelledby="audience-heading">
     <div class="container">
       <h2 id="audience-heading">Who Can Use This?</h2>
-      <p>Our AI chatbot solution is designed for a wide range of industries.</p>
+      <p>Our AI chatbot solution is designed for a wideelement.innerHTML = range of industries.</p>
       <p>It’s perfect for anyone looking to automate customer engagement and grow their business.</p>
       <div class="feature-stack">
         <div class="feature">
